@@ -28,14 +28,16 @@ SETUP API
 package main
 
 import (
+	
 	"database/sql"
 	"fmt"
 	"log"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gin-gonic/gin"
-)
+	)
 
-func main() {
+	func main() {
+	
 	dbUser := "root"
 	dbPassword := ""
 	dbHost := "localhost"
@@ -59,7 +61,7 @@ func main() {
 	}
 	fmt.Println("Connected to MySQL successfully")
 
-r.GET("/ping", func(c *gin.Context) {
+	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "API + DB connected",
 		})
@@ -77,3 +79,4 @@ MENJALANKAN Project
 2. Ketik "go run main.go" di terminal bash VS Code
 
 3. Ketikkan di UI Postman sesuai dengan endpoint yang sudah tersedia (contoh GET "http://localhost:8080/dashboard/summary" atau POST "http://localhost:8080/transactions" dan ketik didalam Body -> raw (Language JSON) sesuai dengan column tabel) untuk CRUD kedalam database MySQL
+
