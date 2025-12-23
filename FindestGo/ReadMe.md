@@ -24,10 +24,13 @@ SETUP API
 1. Download dan Install Postman
 2. New file bernama "main.go" dalam Visual Studio Code dengan programming language "Go" (Golang) 
 3. Ketik "go mod init /(nama folder)" serta get github yang dibutuhkan dalam import "go get (link github)"
-3. Berikan Code untuk connect kepada API dan Database yang sudah dibuat, berikut code nya
-package main
+3. Berikan Code untuk connect kepada API dan Database yang sudah dibuat,
 
-import (
+Berikut ini codenya:
+
+	package main
+
+	import (
 	
 	"database/sql"
 	"fmt"
@@ -38,45 +41,46 @@ import (
 
 	func main() {
 	
-	dbUser := "root"
-	dbPassword := ""
-	dbHost := "localhost"
-	dbPort := "3306"
-	dbName := "findest_go"
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
-		dbUser,
-		dbPassword,
-		dbHost,
-		dbPort,
-		dbName,
-	)
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		log.Fatal("Failed to open DB:", err)
-	}
-	defer db.Close()
-	err = db.Ping()
-	if err != nil {
-		log.Fatal("Failed to connect to DB:", err)
-	}
-	fmt.Println("Connected to MySQL successfully")
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "API + DB connected",
+		dbUser := "root"
+		dbPassword := ""
+		dbHost := "localhost"
+		dbPort := "3306"
+		dbName := "findest_go"
+		dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+			dbUser,
+			dbPassword,
+			dbHost,
+			dbPort,
+			dbName,
+		)
+		db, err := sql.Open("mysql", dsn)
+		if err != nil {
+			log.Fatal("Failed to open DB:", err)
+		}
+		defer db.Close()
+		err = db.Ping()
+		if err != nil {
+			log.Fatal("Failed to connect to DB:", err)
+		}
+		fmt.Println("Connected to MySQL successfully")
+	
+		r.GET("/ping", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "API + DB connected",
+			})
 		})
-	})
-    r.Run(":8080")
-}
+	    r.Run(":8080")
+	}
 
-4. Setelah nya, lakukan "go run main.go" dalam terminal bash di Visual Studio Code
-5. Lalu buka UI Postman dan pilih GET serta ketik "http://localhost:8080/ping" lalu klik tombol Send
-6. Sebuah pesan akan tertera sesuai dengan variabel "message" yang sudah diketikkan di dalam main.go
-7. Setelah verifikasi koneksi, dapat menambahkan endpoint sesuai dengan kebutuhan
+5. Setelah nya, lakukan "go run main.go" dalam terminal bash di Visual Studio Code
+6. Lalu buka UI Postman dan pilih GET serta ketik "http://localhost:8080/ping" lalu klik tombol Send
+7. Sebuah pesan akan tertera sesuai dengan variabel "message" yang sudah diketikkan di dalam main.go
+8. Setelah verifikasi koneksi, dapat menambahkan endpoint sesuai dengan kebutuhan
 
 MENJALANKAN Project
 1. Run MySQL, Postman, Visual Studio Code
 2. Ketik "go run main.go" di terminal bash VS Code
 
 3. Ketikkan di UI Postman sesuai dengan endpoint yang sudah tersedia (contoh GET "http://localhost:8080/dashboard/summary" atau POST "http://localhost:8080/transactions" dan ketik didalam Body -> raw (Language JSON) sesuai dengan column tabel) untuk CRUD kedalam database MySQL
+
 
